@@ -1,0 +1,10 @@
+[
+    {
+      "user_id": "user_001",
+      "user_name": "小明",
+      "gender": "男",
+      "age": "18",
+      "address":"北京市通州区",
+      "status":"0"
+    }
+]
