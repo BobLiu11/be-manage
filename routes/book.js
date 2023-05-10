@@ -1,15 +1,26 @@
 var express = require("express");
 var router = express.Router();
 const BookModel = require("../schema/book");
+const mongoose = require("mongoose");
 /**
  * router路由不支持 url:/book/:id 模式
  * app.get("/hello/:who?", function(req, res) {
-      res.end("Hello, " + req.params.who + ".");
-   });
+ *    res.end("Hello, " + req.params.who + ".");
+ * });
  */
 //查找所有书籍信息的接口
-router.get("/book", function (req, res, next) {
-  BookModel.find({})
+router.get("/book", async (req, res, next) => {
+  let queryArr = [{}];
+  if (req.query.value) {
+    queryArr = [
+      { bookname: req.query.value },
+      { author: req.query.value },
+      { publisher: req.query.value },
+    ];
+  }
+  BookModel.find({
+    $or: queryArr,
+  })
     .then((data) => {
       res.json({ code: 200, message: "获取图书成功", data });
     })
@@ -20,9 +31,14 @@ router.get("/book", function (req, res, next) {
 
 //根据id查找书籍信息的接口
 router.get("/findBook", async (req, res) => {
-  BookModel.findOne(req.params.id)
+  BookModel.findOne(req.query.id)
     .then((data) => {
-      res.json({ code: 200, message: "查找图书成功", data });
+      if (data) {
+        console.log(data);
+        res.json({ code: 200, message: "查找图书成功", data });
+      } else {
+        res.json({ code: 300, message: "未查找到图书" });
+      }
     })
     .catch((err) => {
       res.send(err);
@@ -31,16 +47,16 @@ router.get("/findBook", async (req, res) => {
 
 //新增书籍信息的接口
 router.post("/addBook", async (req, res) => {
-  BookModel.create(req.body, (err, book) => {
+  BookModel.create(req.body.book, (err, book) => {
     if (err) {
       res.json({
-        status: "201",
+        status: 201,
         message: err.message,
       });
     } else {
       res.json({
         book,
-        code: "200",
+        code: 200,
         message: "添加成功",
       });
     }
