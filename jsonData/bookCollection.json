@@ -1,0 +1,56 @@
+[{
+  "_id": {
+    "$oid": "645b6a443d07ade3be692849"
+  },
+  "bookname": "java权威指南",
+  "author": "犀牛",
+  "publisher": "重庆出版社",
+  "updated": {
+    "$date": "2023-05-10T09:56:20.815Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "645b6a703d07ade3be69284e"
+  },
+  "bookname": "css权威指南",
+  "author": "犀牛",
+  "publisher": "重庆出版社",
+  "updated": {
+    "$date": "2023-05-10T09:57:04.874Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "645b6ac33d07ade3be692854"
+  },
+  "bookname": "html权威指南",
+  "author": "犀牛",
+  "publisher": "重庆出版社",
+  "updated": {
+    "$date": "2023-05-10T09:58:27.159Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "645b6b2b3d07ade3be692858"
+  },
+  "bookname": "nosql",
+  "author": "nosql",
+  "publisher": "四川出版社",
+  "updated": {
+    "$date": "2023-05-10T10:00:11.070Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "645b6b8d3d07ade3be69285f"
+  },
+  "bookname": "mongodb权威指南",
+  "author": "mongo",
+  "publisher": "江苏出版社",
+  "updated": {
+    "$date": "2023-05-10T10:01:49.087Z"
+  },
+  "__v": 0
+}]
