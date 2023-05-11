@@ -5,10 +5,6 @@ var Schema = mongoose.Schema;
 
 var bookSchema = new Schema(
   {
-    // index: {
-    //   type: String,
-    //   required: true,
-    // },
     bookname: String,
     author: String,
     publisher: String,

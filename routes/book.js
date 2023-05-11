@@ -30,20 +30,20 @@ router.get("/book", async (req, res, next) => {
 });
 
 //根据id查找书籍信息的接口
-router.get("/findBook", async (req, res) => {
-  BookModel.findOne(req.query.id)
-    .then((data) => {
-      if (data) {
-        console.log(data);
-        res.json({ code: 200, message: "查找图书成功", data });
-      } else {
-        res.json({ code: 300, message: "未查找到图书" });
-      }
-    })
-    .catch((err) => {
-      res.send(err);
-    });
-});
+// router.get("/findBook", async (req, res) => {
+//   BookModel.findOne(req.query.id)
+//     .then((data) => {
+//       if (data) {
+//         console.log(data);
+//         res.json({ code: 200, message: "查找图书成功", data });
+//       } else {
+//         res.json({ code: 300, message: "未查找到图书" });
+//       }
+//     })
+//     .catch((err) => {
+//       res.send(err);
+//     });
+// });
 
 //新增书籍信息的接口
 router.post("/addBook", async (req, res) => {
@@ -64,35 +64,29 @@ router.post("/addBook", async (req, res) => {
 });
 
 //根据id更新书籍信息的接口
-router.put("/updateBook", async (req, res) => {
+router.put("/updateBook", (req, res) => {
+  let book = JSON.parse(req.query.book);
   BookModel.findOneAndUpdate(
     {
-      id: req.body.id,
+      _id: book._id,
     },
     {
-      $set: req.body,
-    },
-    {},
-    (err, data) => {
-      if (err) {
-        res.json({
-          status: "201",
-          message: err.message,
-        });
-      } else {
-        res.json({
-          data,
-          code: "200",
-          message: "更新图书信息成功",
-        });
-      }
+      $set: book,
     }
-  );
+  )
+    .then((data) =>
+      res.json({
+        data,
+        code: 200,
+        message: "更新图书信息成功",
+      })
+    )
+    .catch((err) => res.json(err.message));
 });
 
 //根据id删除书籍信息的接口
 router.delete("/deleteBook", (req, res) => {
-  BookModel.findOneAndDelete({ id: req.body.id })
+  BookModel.findOneAndDelete({ _id: req.body.id })
     .then((data) => res.json({ code: 200, message: "删除图书成功", data }))
     .catch((err) => res.json(err.message));
 });
